@@ -1,0 +1,245 @@
+import React, { useState } from "react";
+import enquiry from '../../assets/enquiry.png';
+
+export default function GroundOwners() {
+    
+     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyoXWDSD5RmZQ9ZsRZ3djQtVZrCNl10W2muQ66xA1XyPntjvNfRMeE1_po5S38piaO86w/exec";
+
+    const [formData, setFormData] = useState({
+        type:"1",
+    groundName: "",
+    location: "",
+    contact: "",
+    groundSize: "",
+    facility: "",
+    installDate: "",
+    notes: "",
+  });
+
+   const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+  const handlerequest = async  () => {
+
+    if (formData.groundName === "" || formData.location === "" || formData.contact === "" || formData.groundSize === "" || formData.facility === "" || formData.installDate === "") {
+      alert("Please fill all the required fields.");
+      return;
+    }
+    try {
+             console.log(formData);
+       const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+  console.log(response);  
+
+
+    } catch (error) {
+          console.log(error);
+    }
+   
+  }
+    const inputStyle = {
+  width: "100%",
+  padding: "16px 18px",
+  marginTop: "8px",
+  borderRadius: "10px",
+  border: "1px solid rgba(0,0,0,0.2)",
+  fontSize: "18px",
+  outline: "none",
+  background: "rgba(255,255,255,0.7)",
+};
+  return (
+    <div style={{ width: "100%" , marginTop:"50px" }}>
+      <div
+        style={{
+          width: "100%",
+          padding: "60px 20px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        {/* Icon */}
+        <div
+          style={{
+            width: "90px",
+            height: "90px",
+            borderRadius: "50%",
+            backgroundColor: "#e0e7ff",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <img src={enquiry} alt="Enquiry" style={{ width: "50%", height: "50%" }} />
+        </div>
+
+        {/* Title */}
+        <div style={{ fontSize: "48px", fontWeight: "700", textAlign: "center" }}>
+          <span style={{ color: "black" }}>Ground Owner </span>
+          <span
+            style={{
+              background: "linear-gradient(135deg, #2563eb, #7c3aed)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Enquiry
+          </span>
+        </div>
+
+        {/* Description */}
+        <p
+          style={{
+            fontSize: "20px",
+            width: "80%",
+            maxWidth: "800px",
+            textAlign: "center",
+            marginTop: "20px",
+            color: "#4b5563",
+          }}
+        >
+          Get in touch with us for any ground-level installation, setup, or demo requests.
+          We are here to help you bring AI-powered cricket technology to your venue.
+        </p>
+      </div>
+        <div
+      style={{
+        width: "80%",
+        margin: "50px auto",
+        padding: "40px",
+        borderRadius: "16px",
+        background: "rgba(255,255,255,0.35)",
+        backdropFilter: "blur(10px)",
+        boxShadow: "0 8px 30px rgba(0,0,0,0.1)",
+        fontFamily: "Roboto Condensed, sans-serif",
+      }}
+    >
+      {/* <h2 style={{ fontSize: "36px", fontWeight: 700, marginBottom: "30px" }}>
+        Ground Installation Request
+      </h2> */}
+
+      {/* Row 1 : Ground Name + Location */}
+      <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ fontSize: "20px", fontWeight: 500 }}>Ground Name *</label>
+          <input
+            type="text"
+            name="groundName"
+             value={formData.groundName}
+  onChange={handleChange}
+            placeholder="e.g., Melbourne Cricket Ground"
+            style={inputStyle}
+          />
+        </div>
+
+        <div style={{ flex: 1 }}>
+          <label style={{ fontSize: "20px", fontWeight: 500 }}>Location *</label>
+          <input
+            type="text"
+            name="location"
+             value={formData.location}
+  onChange={handleChange}
+            placeholder="City, State"
+            style={inputStyle}
+          />
+        </div>
+      </div>
+
+      {/* Row 2 : Contact Number + Ground Size (Dropdown) */}
+      <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ fontSize: "20px", fontWeight: 500 }}>Contact Number *</label>
+          <input
+            type="tel"
+             name="contact"
+             value={formData.contact}
+  onChange={handleChange}
+            placeholder="+91 9876543210"
+            style={inputStyle}
+          />
+        </div>
+
+        <div style={{ flex: 1 }}>
+          <label style={{ fontSize: "20px", fontWeight: 500 }}>Ground Size *</label>
+          <select style={inputStyle}
+          value={formData.groundSize}
+           name="groundSize"
+  onChange={handleChange}>
+            <option value="">Select Size</option>
+            <option>Small (Under 60m radius)</option>
+            <option>Medium (60–70m radius)</option>
+            <option>Large (70m+ radius)</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Row 3 : Current Facility */}
+      <div style={{ marginBottom: "25px" }}>
+        <label style={{ fontSize: "20px", fontWeight: 500 }}>Current Facilities *</label>
+        <input
+          type="text"
+            name="facility"
+           value={formData.facility}
+  onChange={handleChange}
+          placeholder="Describe existing pitch / turf / nets etc."
+          style={inputStyle}
+        />
+      </div>
+
+      {/* Row 4 : Preferred Installation Date (opens calendar) */}
+      <div style={{ marginBottom: "25px" }}>
+        <label style={{ fontSize: "20px", fontWeight: 500 }}>
+          Preferred Installation Date *
+        </label>
+        <input type="date" style={inputStyle} 
+         value={formData.installDate}
+          name="installDate"
+  onChange={handleChange}
+  onFocus={(e) => e.target.showPicker()} 
+  />
+      </div>
+
+      {/* Row 5 : Additional Notes */}
+      <div style={{ marginBottom: "25px" }}>
+        <label style={{ fontSize: "20px", fontWeight: 500 }}>Additional Notes</label>
+        <textarea
+          placeholder="Any additional instructions..."
+          name="notes"
+          rows={5}
+           value={formData.notes}
+  onChange={handleChange}
+          style={{
+            ...inputStyle,
+            height: "140px",
+            resize: "vertical",
+          }}
+        ></textarea>
+      </div>
+
+      {/* Submit Button */}
+      <button
+        style={{
+          marginTop: "15px",
+          background: "#2563eb",
+          color: "white",
+          padding: "16px 32px",
+          fontSize: "22px",
+          fontWeight: "600",
+          borderRadius: "10px",
+          border: "none",
+          cursor: "pointer",
+        }}
+        onClick={() => handlerequest()}
+      >
+        Submit Request
+      </button>
+    </div>
+    </div>
+  );
+}
