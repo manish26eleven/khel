@@ -1,8 +1,12 @@
 import { useState } from "react";
 import enquiry from '../../assets/enquiry.png';
+import useWindowSize from "../../hooks/useWindowsize";
+import { useNavigate } from "react-router-dom";
 export default function Organizers() {
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbydopejpKY-NvDygdmFHcg0LeK4iPnA45yS3KQZzVVb6-szaFKcG862S7SZKOOLrHd0jg/exec";
-
+    const {width} = useWindowSize();
+     const navigate = useNavigate();
+        const isMobile = width <= 1000;
      const [formData, setFormData] = useState({
         organizationName: "",
         contactPerson: "",
@@ -33,6 +37,9 @@ export default function Organizers() {
       body: JSON.stringify(formData),
     });
   console.log(response);  
+   alert("Request submitted successfully!");
+  navigate('/');
+
   
 
     } catch (error) {
@@ -55,11 +62,11 @@ export default function Organizers() {
     };
   return (
    <>
-        <div style={{ width: "100%" , marginTop:"50px" }}>
+        <div style={{ width: '100vw' , marginTop:"50px" }}>
              <div
                style={{
                  width: "100%",
-                 padding: "60px 20px",
+                 padding: isMobile ? "40px 10px" :"60px 20px",
                  display: "flex",
                  flexDirection: "column",
                  alignItems: "center",
@@ -83,7 +90,7 @@ export default function Organizers() {
        
                {/* Title */}
                <div style={{ fontSize: "48px", fontWeight: "700", textAlign: "center" }}>
-                 <span style={{ color: "black" }}>Tournament Organizer  </span>
+                 <span style={{ color: "black" }}>Tournament Organizers  </span>
                  <span
                    style={{
                      background: "linear-gradient(135deg, #2563eb, #7c3aed)",
@@ -125,7 +132,7 @@ export default function Organizers() {
             
        
              {/* Row 1 : Ground Name + Location */}
-             <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+             <div style={{ display: "flex",flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                <div style={{ flex: 1 }}>
                  <label style={{ fontSize: "20px", fontWeight: 500 }}>Organization Name *</label>
                  <input
@@ -152,7 +159,7 @@ export default function Organizers() {
              </div>
        
              {/* Row 2 : Contact Number + Ground Size (Dropdown) */}
-             <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+             <div style={{ display: "flex",flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                <div style={{ flex: 1 }}>
                  <label style={{ fontSize: "20px", fontWeight: 500 }}>Contact Number *</label>
                  <input
@@ -181,7 +188,7 @@ export default function Organizers() {
              </div>
        
              {/* Row 3 : Current Facility */}
-                <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+                <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                <div style={{ flex: 1 }}>
                  <label style={{ fontSize: "20px", fontWeight: 500 }}>
           Event Start Date *
@@ -207,7 +214,7 @@ export default function Organizers() {
              </div>
        
              {/* Row 4 : Preferred Installation Date (opens calendar) */}
-              <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+              <div style={{ display: "flex",flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                  <div style={{ flex: 1 }}>
                  <label style={{ fontSize: "20px", fontWeight: 500 }}> Services Required *</label>
                  <select style={inputStyle}
@@ -222,7 +229,7 @@ export default function Organizers() {
                  </select>
                </div>
                <div style={{ flex: 1 }}>
-                 <label style={{ fontSize: "20px", fontWeight: 500 }}>venue Location *</label>
+                 <label style={{ fontSize: "20px", fontWeight: 500 }}>Venue Location *</label>
                  <input
                    type="text"
                     name="venueLocation"

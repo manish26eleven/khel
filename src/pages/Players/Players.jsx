@@ -1,7 +1,11 @@
 import { useState } from "react";
 import enquiry from '../../assets/enquiry.png';
+import useWindowSize from "../../hooks/useWindowsize";
+import { useNavigate } from "react-router-dom";
 export default function Players() {
-
+      const {width} = useWindowSize();
+        const isMobile = width <= 1000;
+         const navigate = useNavigate();
       const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbydopejpKY-NvDygdmFHcg0LeK4iPnA45yS3KQZzVVb6-szaFKcG862S7SZKOOLrHd0jg/exec";
 
      const [formData, setFormData] = useState({
@@ -33,6 +37,9 @@ export default function Players() {
       body: JSON.stringify(formData),
     });
   console.log(response);  
+   alert("Request submitted successfully!");
+  navigate('/');
+
   
 
     } catch (error) {
@@ -52,12 +59,12 @@ export default function Players() {
     };
   return (
    <>
-     <div style={{ width: "100%" , marginTop:"50px" }}>
+     <div style={{ width: '100vw' , marginTop:"50px" }}>
              <div
                style={{
                  width: "100%",
 
-                 padding: "60px 20px",
+                 padding: isMobile ? "40px 10px" :"60px 20px",
                  display: "flex",
                  flexDirection: "column",
                  alignItems: "center",
@@ -81,7 +88,7 @@ export default function Players() {
        
                {/* Title */}
                <div style={{ fontSize: "48px", fontWeight: "700", textAlign: "center" }}>
-                 <span style={{ color: "black" }}>Player </span>
+                 <span style={{ color: "black" }}>Players </span>
                  <span
                    style={{
                      background: "linear-gradient(135deg, #2563eb, #7c3aed)",
@@ -125,7 +132,7 @@ export default function Players() {
              </h2> */}
        
              {/* Row 1 : Ground Name + Location */}
-             <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+             <div style={{ display: "flex" , flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                <div style={{ flex: 1 }}>
                  <label style={{ fontSize: "20px", fontWeight: 500 }}>Player Name *</label>
                  <input
@@ -152,7 +159,7 @@ export default function Players() {
              </div>
        
              {/* Row 2 : Contact Number + Ground Size (Dropdown) */}
-             <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+             <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                <div style={{ flex: 1 }}>
                  <label style={{ fontSize: "20px", fontWeight: 500 }}>Contact Number *</label>
                  <input
@@ -181,14 +188,14 @@ export default function Players() {
              </div>
        
              {/* Row 3 : Current Facility */}
-                  <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+                  <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                <div style={{ flex: 1 }}>
-                 <label style={{ fontSize: "20px", fontWeight: 500 }}>Interested features *</label>
+                 <label style={{ fontSize: "20px", fontWeight: 500 }}>Interested Features *</label>
                  <select style={inputStyle}
                  value={formData.interestedFeatures}
                   name="interestedFeatures"
          onChange={handleChange}>
-                   <option value="">what interest you?</option>
+                   <option value="">What Interests You?</option>
                     <option>DRS System</option>
                    <option>Performance Analytics</option>
                    <option>Both</option>

@@ -1,24 +1,39 @@
 import PhoneScrollAnimation from "../PhoneScrollAnimation/PhoneScrollanimation";
 import "./Home.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cricketfield from '../../assets/cricketfield.jpg';
 import { useNavigate } from "react-router-dom";
+import useWindowSize from "../../hooks/useWindowsize";
+import PopupModal from "../../components/PopupModal";
 
 const Home = () => {
+  const {width} = useWindowSize();
+        const isMobile = width <= 1000;
   const [isLogin, setIsLogin] = useState(true);
+  const [isNewUser, setIsNewUser] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
    const navigate = useNavigate();
 
+   useEffect(() => {
+     const hasSeenPopup = localStorage.getItem("hasSeenPopup");
+
+  if (!hasSeenPopup) {
+    setIsNewUser(true);
+  }
+  
+  }, []);
+
   return (
     <>
-      <div style={{display:'flex',justifyContent: 'space-between' ,  alignItems: 'center', /* vertical alignment */
-      width: '100%' ,padding:'60px' ,  marginTop: "88px", backgroundColor:'rgba(242 , 244 , 254)'}}>
-            <div style={{ width: "50%", display: "flex", flex: 1 , flexDirection: "column" }}> <div >
+     {isNewUser &&<PopupModal isNewUser={isNewUser} setIsNewUser={setIsNewUser} /> }
+      <div style={{display:'flex' , flexDirection : isMobile ? 'column' : 'row' ,  alignItems: 'center', /* vertical alignment */
+      width:'100%' ,padding: isMobile ? '20px' : '60px' ,  backgroundColor:'rgba(242 , 244 , 254)'}}>
+            <div style={{ width: isMobile ? '85%' :  "50%", display: "flex", flex: 1 , flexDirection: "column" }}> <div >
               <span
           style={{
             fontFamily: "Roboto Condensed, sans-serif",
-            fontSize: "64px",
+            fontSize: isMobile ? '40px' : "64px",
             fontWeight: 700,
             lineHeight: "1.1",
           }}
@@ -29,7 +44,7 @@ const Home = () => {
         <span
           style={{
             fontFamily: "Roboto Condensed, sans-serif",
-            fontSize: "64px",
+            fontSize:  isMobile ? '40px' : "64px",
             fontWeight: 700,
             background: "linear-gradient(135deg, #2563eb, #7c3aed)",
             WebkitBackgroundClip: "text",
@@ -40,28 +55,28 @@ const Home = () => {
         </span>
          
         </div>
-         <span style={{fontSize:'25px' , marginTop:'20px'}} >
+         <span style={{fontSize:  isMobile ? '20px' : '25px' , marginTop:'20px'}} >
             Bring professional DRS systems and broadcasting to your local matches. Experience cricket like never before with Crik.ai.
           </span>
-          <div style={{ display: "flex", gap: "32px", marginTop: "30px" }}>
+          {/* <div style={{ display: "flex", gap: "32px", marginTop: "30px" }}>
           <button style={{fontSize : '20px' , padding: '12px 32px' , color:'white' , backgroundColor:'#2563eb'}}>
             Explore Services 
           </button>
           <button  style={{fontSize : '20px' , padding: '12px 32px' , color:'black' , backgroundColor:' #e2e8f0'}}>
             Learn More
           </button>
-          </div>
+          </div> */}
                   </div>
-            <div  style={{ width: "50%", display: "flex", flexDirection: "column" }} >
+            <div  style={{ width: isMobile ? '100%' : "50%",marginTop: isMobile ? '32px' : '0px' , display: "flex", flexDirection: "column" }} >
               <div style={{ display: "flex", justifyContent: "center" , alignItems: "center" , borderRadius :'30px' , padding:'10px'  }}>
-                 <img src={cricketfield} alt="Crik.ai Hero" style={{ width: "70%", height: "auto" , borderRadius :'30px' }} />
+                 <img src={cricketfield} alt="Crik.ai Hero" style={{ width: isMobile ? '95%' : "70%", height: "auto" , borderRadius :'30px' }} />
               </div>
               
             </div>
            
           </div>
            <div style={{  width: "100%", textAlign: "center" , paddingTop:'60px' , marginTop:'48px', justifyContent:'center' , alignItems:'center' , display:'flex' , flexDirection:'column'}} >
-               <span style={{fontSize:'72px', fontWeight:'700' ,fontFamily:'Roboto Condensed, sans-serif'}} >
+               <span style={{fontSize:  isMobile ? '40px' : '72px', fontWeight:'700' ,fontFamily:'Roboto Condensed, sans-serif'}} >
                 Why  Choose  Crik.ai?
                </span>
                <span style={{fontSize:'20px' , marginTop:'10px' , fontFamily:'Roboto Condensed, sans-serif'}} >
@@ -70,9 +85,10 @@ const Home = () => {
                <div
       style={{
         display: "flex",
+        flexDirection : isMobile ? "column" : "row",
         justifyContent: "space-between",
         gap: "30px",
-        padding: "60px",
+        padding: isMobile ? '42px' : "60px",
       }}
     >
       {/* CARD 1 */}
@@ -81,13 +97,13 @@ const Home = () => {
           flex: 1,                    // makes all cards equal width
           borderRadius: "20px",
           border: "1px solid #e2e8f0",
-          padding: "40px 30px",
+          padding: isMobile ? '16px' : "40px 30px",
           backgroundColor: "white",
           boxShadow: "0px 8px 20px rgba(0,0,0,0.08)",
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: "70px", marginBottom: "20px" }}>📡</div>
+        <div style={{ fontSize: isMobile ? '48px' :  "70px", marginBottom: "20px" }}>📡</div>
         <h2
           style={{
             fontSize: "32px",
@@ -109,13 +125,13 @@ const Home = () => {
           flex: 1,
           borderRadius: "20px",
           border: "1px solid #e2e8f0",
-          padding: "40px 30px",
+          padding: isMobile ? '16px' : "40px 30px",
           backgroundColor: "white",
           boxShadow: "0px 8px 20px rgba(0,0,0,0.08)",
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: "70px", marginBottom: "20px" }}>🎥</div>
+        <div style={{ fontSize: isMobile ? '48px' : "70px", marginBottom: "20px" }}>🎥</div>
         <h2
           style={{
             fontSize: "32px",
@@ -137,13 +153,13 @@ const Home = () => {
           flex: 1,
           borderRadius: "20px",
           border: "1px solid #e2e8f0",
-          padding: "40px 30px",
+          padding: isMobile ? '16px' : "40px 30px",
           backgroundColor: "white",
           boxShadow: "0px 8px 20px rgba(0,0,0,0.08)",
           textAlign: "center",
         }}
       >
-        <div style={{ fontSize: "70px", marginBottom: "20px" }}>🤖</div>
+        <div style={{ fontSize:  isMobile ? '48px' : "70px", marginBottom: "20px" }}>🤖</div>
         <h2
           style={{
             fontSize: "32px",
@@ -175,7 +191,7 @@ const Home = () => {
       {/* Title */}
       <h1
         style={{
-          fontSize: "56px",
+          fontSize: isMobile ? '40px' : "56px",
           fontWeight: 700,
           fontFamily: "Roboto Condensed, sans-serif",
           marginBottom: "20px",
@@ -187,7 +203,7 @@ const Home = () => {
       {/* Description */}
       <p
         style={{
-          fontSize: "22px",
+          fontSize:  "22px",
           maxWidth: "800px",
           margin: "auto",
           lineHeight: "1.4",
@@ -203,16 +219,17 @@ const Home = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: "48px",
+          gap:isMobile ? '32px' :  "48px",
           marginTop: "40px",
           flexWrap: "wrap",
         }}
       >
         <button
           style={{
-            padding: "20px 48px",
+            padding:  "20px 48px",
             fontSize: "24px",
             fontWeight: 600,
+              width: isMobile ? '85%' : 'auto',
             color: "black",
             backgroundColor: "white",
             borderRadius: "10px",
@@ -228,6 +245,7 @@ const Home = () => {
           style={{
              padding: "20px 48px",
             fontSize: "24px",
+            width: isMobile ? '85%' : 'auto',
             fontWeight: 600,
             color: "black",
             backgroundColor: "white",
@@ -246,6 +264,7 @@ const Home = () => {
             fontSize: "24px",
             fontWeight: 600,
             color: "black",
+              width: isMobile ? '85%' : 'auto',
             backgroundColor: "white",
             borderRadius: "10px",
             border: "none",
@@ -257,15 +276,15 @@ const Home = () => {
         </button>
       </div>
     </div>
-         <div style={{ width: "100%", marginTop: "150px", padding: "0 40px" }}>
+         <div style={{ width: "100%", marginTop: isMobile ? '50px' :  "150px", padding: "0 40px" , marginBottom: isMobile ? '40px' :  "70px" }}>
       {/* Title */}
       <h1
         style={{
           textAlign: "center",
-          fontSize: "68px",
+          fontSize: isMobile ? '42px' : "68px",
           fontWeight: 800,
           fontFamily: "Roboto Condensed, sans-serif",
-          marginBottom: "20px",
+          marginBottom: isMobile ? '12px' :  "20px",
         }}
       >
         What Our Clients Say
@@ -275,7 +294,7 @@ const Home = () => {
       <p
         style={{
           textAlign: "center",
-          fontSize: "28px",
+          fontSize:isMobile ? '24px' : "28px",
           maxWidth: "900px",
           margin: "0 auto",
           opacity: 0.8,
@@ -296,6 +315,7 @@ const Home = () => {
           maxWidth: "1800px",
           margin: "0 auto",
           flexWrap: "wrap",
+          flexDirection: isMobile ? "column" : "row",
           justifyContent: "space-between",
         }}
       >
@@ -324,9 +344,9 @@ const Home = () => {
             key={index}
             style={{
               flex: "1",
-              minWidth: "350px",
+              minWidth:  isMobile ? '200px' : "350px",
               background: "white", // pure white
-              padding: "50px",
+              padding: isMobile ? '30px' : "50px",
               borderRadius: "22px",
               boxShadow: "0 12px 40px rgba(0,0,0,0.15)", // stronger smooth shadow
               border: "1px solid rgba(0,0,0,0.05)",
@@ -334,9 +354,9 @@ const Home = () => {
           >
             <div
               style={{
-                fontSize: "26px",
+                fontSize: isMobile ? '23px' : "26px",
                 fontWeight: "700",
-                marginBottom: "16px",
+                marginBottom: isMobile ? '8px' :  "16px",
               }}
             >
               ✔ Verified Client
@@ -344,7 +364,7 @@ const Home = () => {
     
             <p
               style={{
-                fontSize: "30px",
+                fontSize: isMobile ? '24px' :  "30px",
                 fontStyle: "italic",
                 marginBottom: "30px",
                 lineHeight: "1.5",
@@ -355,15 +375,15 @@ const Home = () => {
     
             <h3
               style={{
-                fontSize: "28px",
+                fontSize: isMobile ? '22px' :  "28px",
                 fontWeight: "700",
-                marginBottom: "4px",
+                marginBottom: isMobile ? "2px" : "4px",
               }}
             >
               {card.name}
             </h3>
     
-            <span style={{ fontSize: "22px", opacity: 0.7 }}>{card.role}</span>
+            <span style={{ fontSize: isMobile ? '20px' :  "22px", opacity: 0.7 }}>{card.role}</span>
           </div>
         ))}
       </div>

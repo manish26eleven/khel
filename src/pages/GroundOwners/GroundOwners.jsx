@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import enquiry from '../../assets/enquiry.png';
+import useWindowSize from "../../hooks/useWindowsize";
+import { useNavigate } from "react-router-dom";
 
 export default function GroundOwners() {
-    
+     const {width} = useWindowSize();
+        const isMobile = width <= 1000;
+          const navigate = useNavigate();
      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyoXWDSD5RmZQ9ZsRZ3djQtVZrCNl10W2muQ66xA1XyPntjvNfRMeE1_po5S38piaO86w/exec";
 
     const [formData, setFormData] = useState({
@@ -11,7 +15,7 @@ export default function GroundOwners() {
     location: "",
     contact: "",
     groundSize: "",
-    facility: "",
+    noofPitches: "",
     installDate: "",
     notes: "",
   });
@@ -35,6 +39,8 @@ export default function GroundOwners() {
       body: JSON.stringify(formData),
     });
   console.log(response);  
+  alert("Request submitted successfully!");
+  navigate('/');
 
 
     } catch (error) {
@@ -53,11 +59,11 @@ export default function GroundOwners() {
   background: "rgba(255,255,255,0.7)",
 };
   return (
-    <div style={{ width: "100%" , marginTop:"50px" }}>
+    <div style={{ width: '100vw', marginTop:"50px" ,  }}>
       <div
         style={{
           width: "100%",
-          padding: "60px 20px",
+          padding:  isMobile ? "40px 10px" :"60px 20px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -81,7 +87,7 @@ export default function GroundOwners() {
 
         {/* Title */}
         <div style={{ fontSize: "48px", fontWeight: "700", textAlign: "center" }}>
-          <span style={{ color: "black" }}>Ground Owner </span>
+          <span style={{ color: "black" }}>Ground Owners </span>
           <span
             style={{
               background: "linear-gradient(135deg, #2563eb, #7c3aed)",
@@ -125,7 +131,7 @@ export default function GroundOwners() {
       </h2> */}
 
       {/* Row 1 : Ground Name + Location */}
-      <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+      <div style={{ display: "flex",   flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
         <div style={{ flex: 1 }}>
           <label style={{ fontSize: "20px", fontWeight: 500 }}>Ground Name *</label>
           <input
@@ -152,7 +158,7 @@ export default function GroundOwners() {
       </div>
 
       {/* Row 2 : Contact Number + Ground Size (Dropdown) */}
-      <div style={{ display: "flex", gap: "30px", marginBottom: "25px" }}>
+      <div style={{ display: "flex" , flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
         <div style={{ flex: 1 }}>
           <label style={{ fontSize: "20px", fontWeight: 500 }}>Contact Number *</label>
           <input
@@ -181,13 +187,13 @@ export default function GroundOwners() {
 
       {/* Row 3 : Current Facility */}
       <div style={{ marginBottom: "25px" }}>
-        <label style={{ fontSize: "20px", fontWeight: 500 }}>Current Facilities *</label>
+        <label style={{ fontSize: "20px", fontWeight: 500 }}>Number of Pitches *</label>
         <input
           type="text"
-            name="facility"
-           value={formData.facility}
+            name="noofPitches"
+           value={formData.noofPitches}
   onChange={handleChange}
-          placeholder="Describe existing pitch / turf / nets etc."
+          placeholder="1"
           style={inputStyle}
         />
       </div>
