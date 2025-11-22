@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 
 export default function PopupModal({isNewUser , setIsNewUser}) {
+    const  GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwyLeX_fXKR6NAutqJYsYGaWpRJffcBOcqp52fF7M4arvEI_f4qjV8ShIgdk3XJu7CtIQ/exec";
+
   const [isNew, setIsNew] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
   });
-
-  const submitForm = () => {
+  
+  const submitForm  = async  () => {
     if (formData.name === "" || formData.phone === "") {
       alert("Please fill all the fields.");
       return;
@@ -16,9 +18,28 @@ export default function PopupModal({isNewUser , setIsNewUser}) {
       alert("Please enter a valid 10-digit phone number.");
       return;
     }
-    console.log("Form submitted", formData);
-    localStorage.setItem("hasSeenPopup", "true");
+     localStorage.setItem("hasSeenPopup", "true");
     setIsNewUser(false);
+    console.log("Form submitted", formData);
+      try {
+        
+             console.log(formData);
+       const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+  console.log(response);  
+//    alert("Request submitted successfully!");
+  
+
+  
+
+    } catch (error) {
+          console.log(error);
+    }
+   
   };
   const cancelTask = () => {     
     localStorage.setItem("hasSeenPopup", "true");

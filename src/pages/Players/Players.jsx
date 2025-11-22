@@ -6,9 +6,10 @@ export default function Players() {
       const {width} = useWindowSize();
         const isMobile = width <= 1000;
          const navigate = useNavigate();
-      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbydopejpKY-NvDygdmFHcg0LeK4iPnA45yS3KQZzVVb6-szaFKcG862S7SZKOOLrHd0jg/exec";
+      const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxt0z34CzKWROjycI3AyHT7DYjXsM2jKRtjU71nWLZvTfAMH2nh4AX2raFqlQGdFRYFtQ/exec";
 
      const [formData, setFormData] = useState({
+      type: '2',
         playerName: "",
         teamName: "",
         contact: "",
@@ -26,6 +27,10 @@ export default function Players() {
 
     if (formData.playerName === "" || formData.contact === "" || formData.playerRole === "" || formData.interestedFeatures === "" || formData.matchType === "") {
       alert("Please fill all the required fields.");
+      return;
+    }
+    if(formData.contact.length !==10){
+      alert("Please enter a valid 10-digit phone number.");
       return;
     }
     try {
@@ -165,14 +170,48 @@ export default function Players() {
              <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                <div style={{ flex: 1 }}>
                  <label style={{ fontSize: "20px", fontWeight: 500 }}>Contact Number *</label>
-                 <input
+                 {/* <input
                    type="tel"
                     name="contact"
                     value={formData.contact}
          onChange={handleChange}
                    placeholder="+91 9876543210"
                    style={inputStyle}
-                 />
+                 /> */}
+                  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      width: "100%",
+      border: "1px solid #ccc",
+      borderRadius: "8px",
+      padding: "12px",
+      marginTop: "8px",
+    }}
+  >
+    <span style={{ marginRight: "8px", fontSize: "18px", color: "#555" }}>
+      +91
+    </span>
+
+    <input
+      type="tel"
+      name="contact"
+      value={formData.contact}
+      onChange={(e) => {
+      // accept only numbers
+      const cleaned = e.target.value.replace(/\D/g, "");
+      setFormData({ ...formData, contact: cleaned });
+    }}
+      placeholder="9876543210"
+      style={{
+        width: "100%",
+        border: "none",
+        outline: "none",
+        fontSize: "18px",
+      }}
+      maxLength={10}
+    />
+  </div>
                </div>
        
                <div style={{ flex: 1 }}>

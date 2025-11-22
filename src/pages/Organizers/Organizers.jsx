@@ -3,11 +3,12 @@ import enquiry from '../../assets/enquiry.png';
 import useWindowSize from "../../hooks/useWindowsize";
 import { useNavigate } from "react-router-dom";
 export default function Organizers() {
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbydopejpKY-NvDygdmFHcg0LeK4iPnA45yS3KQZzVVb6-szaFKcG862S7SZKOOLrHd0jg/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPI1S6vA67PwucrAC66XeT3CFCg9UqCaCJqEoT7dBUwvmw2-SUBZnNjeEU9b8FCGsc8A/exec";
     const {width} = useWindowSize();
      const navigate = useNavigate();
         const isMobile = width <= 1000;
      const [formData, setFormData] = useState({
+      type:'3',
         organizationName: "",
         contactPerson: "",
         contact: "",
@@ -29,6 +30,10 @@ export default function Organizers() {
 
     if (formData.organizationName === "" || formData.contactPerson === "" || formData.contact === "" || formData.eventType === "" || formData.startDate === "" || formData.numberOfMatches === "" || formData.selectServices === "" || formData.venueLocation === "" ) {
       alert("Please fill all the required fields.");
+      return;
+    }
+     if(formData.contact.length !==10){
+      alert("Please enter a valid 10-digit phone number.");
       return;
     }
     try {
@@ -165,14 +170,49 @@ export default function Organizers() {
              <div style={{ display: "flex",flexDirection: isMobile ? "column" : "row", gap: isMobile ? '15px' :  "30px", marginBottom: "25px" }}>
                <div style={{ flex: 1 }}>
                  <label style={{ fontSize: "20px", fontWeight: 500 }}>Contact Number *</label>
-                 <input
+                 {/* <input
                    type="tel"
                     name="contact"
                     value={formData.contact}
          onChange={handleChange}
                    placeholder="+91 9876543210"
                    style={inputStyle}
-                 />
+                 /> */}
+                  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      width: "100%",
+      border: "1px solid #ccc",
+      borderRadius: "8px",
+      padding: "12px",
+      marginTop: "8px",
+    }}
+  >
+    <span style={{ marginRight: "8px", fontSize: "18px", color: "#555" }}>
+      +91
+    </span>
+
+    <input
+      type="tel"
+      name="contact"
+      value={formData.contact}
+      onChange={(e) => {
+      // accept only numbers
+      const cleaned = e.target.value.replace(/\D/g, "");
+      setFormData({ ...formData, contact: cleaned });
+    }}
+      placeholder="9876543210"
+      
+      style={{
+        width: "100%",
+        border: "none",
+        outline: "none",
+        fontSize: "18px",
+      }}
+      maxLength={10}
+    />
+  </div>
                </div>
        
                <div style={{ flex: 1 }}>
