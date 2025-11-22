@@ -12,6 +12,10 @@ export default function PopupModal({isNewUser , setIsNewUser}) {
       alert("Please fill all the fields.");
       return;
     }
+    if(formData.phone.length !==10){
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
     console.log("Form submitted", formData);
     localStorage.setItem("hasSeenPopup", "true");
     setIsNewUser(false);
@@ -75,7 +79,7 @@ export default function PopupModal({isNewUser , setIsNewUser}) {
             </div>
 
             <h2 style={{ marginBottom: "20px" }}>Welcome to Crik.ai</h2>
-
+   
             <input
               type="text"
               placeholder="Enter your name"
@@ -85,28 +89,48 @@ export default function PopupModal({isNewUser , setIsNewUser}) {
               }
               style={{
                 width: "100%",
-                padding: "12px",
+                padding: "12px 12px",
                 marginBottom: "12px",
+                fontSize: "16px",
                 borderRadius: "8px",
                 border: "1px solid #ccc",
               }}
             />
 
-            <input
-              type="tel"
-              placeholder="Enter phone number"
-              value={formData.phone}
-              onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
-              }
-              style={{
-                width: "100%",
-                padding: "12px",
-                marginBottom: "20px",
-                borderRadius: "8px",
-                border: "1px solid #ccc",
-              }}
-            />
+           <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    padding: "0 12px",
+    
+    marginBottom: "20px",
+  }}
+>
+  <span style={{ marginRight: "8px", fontSize: "16px", color: "#555" }}>
+    +91
+  </span>
+
+  <input
+    type="tel"
+    placeholder="Enter phone number"
+    value={formData.phone}
+    maxLength={10} // exactly 10 digits
+    onChange={(e) => {
+      // accept only numbers
+      const cleaned = e.target.value.replace(/\D/g, "");
+      setFormData({ ...formData, phone: cleaned });
+    }}
+    style={{
+      flex: 1,
+      padding: "12px 0",
+      border: "none",
+      outline: "none",
+      fontSize: "16px",
+    }}
+  />
+</div>
 
             <button
               onClick={() => submitForm()}

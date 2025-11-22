@@ -25,12 +25,13 @@ export default function Header() {
         {/* Left Logo */}
         <div
           style={{
-            fontSize: "40px",
+            fontSize: "52px",
             fontWeight: "700",
             marginLeft: "30px",
             background: "linear-gradient(135deg, #2563eb, #7c3aed)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
+            marginRight: isMobile ?"40px" : '80px',
           }}
         >
           Crik.ai

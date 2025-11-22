@@ -267,7 +267,7 @@ export default function Organizers() {
                style={{
                  marginTop: "15px",
                  background: "#2563eb",
-                 color: "white",
+                 color: "#ffffff",
                  padding: "16px 32px",
                  fontSize: "22px",
                  fontWeight: "600",

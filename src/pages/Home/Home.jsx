@@ -195,6 +195,7 @@ const Home = () => {
           fontWeight: 700,
           fontFamily: "Roboto Condensed, sans-serif",
           marginBottom: "20px",
+          color:'#ffffff'
         }}
       >
         Ready to Get Started?
@@ -208,6 +209,7 @@ const Home = () => {
           margin: "auto",
           lineHeight: "1.4",
           opacity: 0.9,
+          color:'#ffffff'
         }}
       >
         Transform your cricket experience with AI-driven analytics, smart DRS, and
@@ -231,7 +233,7 @@ const Home = () => {
             fontWeight: 600,
               width: isMobile ? '85%' : 'auto',
             color: "black",
-            backgroundColor: "white",
+            backgroundColor: "#ffffff",
             borderRadius: "10px",
             border: "none",
             cursor: "pointer",
@@ -248,7 +250,7 @@ const Home = () => {
             width: isMobile ? '85%' : 'auto',
             fontWeight: 600,
             color: "black",
-            backgroundColor: "white",
+            backgroundColor: "#ffffff",
             borderRadius: "10px",
             border: "none",
             cursor: "pointer",
@@ -265,7 +267,7 @@ const Home = () => {
             fontWeight: 600,
             color: "black",
               width: isMobile ? '85%' : 'auto',
-            backgroundColor: "white",
+           backgroundColor: "#ffffff",
             borderRadius: "10px",
             border: "none",
             cursor: "pointer",
