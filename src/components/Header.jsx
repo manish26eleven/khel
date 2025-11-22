@@ -25,7 +25,7 @@ export default function Header() {
         {/* Left Logo */}
         <div
           style={{
-            fontSize:isMobile ? '40px' :  "48px",
+            fontSize:isMobile ? '32px' :  "46px",
             fontWeight: "700",
             marginLeft: "30px",
             background: "linear-gradient(135deg, #2563eb, #7c3aed)",
