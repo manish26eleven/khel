@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import enquiry from '../../assets/enquiry.png';
 import useWindowSize from "../../hooks/useWindowsize";
 import { useNavigate } from "react-router-dom";
@@ -47,6 +47,9 @@ export default function Players() {
     }
    
   }
+   useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
         const inputStyle = {
       width: "100%",
       padding: "16px 18px",
@@ -59,7 +62,7 @@ export default function Players() {
     };
   return (
    <>
-     <div style={{ width: '100vw' , marginTop:"50px" }}>
+     <div style={{ width: '100vw' , marginTop: isMobile ? '30px' : "50px" }}>
              <div
                style={{
                  width: "100%",

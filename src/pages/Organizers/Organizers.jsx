@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import enquiry from '../../assets/enquiry.png';
 import useWindowSize from "../../hooks/useWindowsize";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,9 @@ export default function Organizers() {
         venueLocation: "",
         notes: "",
       });
+       useEffect(() => {
+          window.scrollTo(0, 0);
+        }, []);
        const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import enquiry from '../../assets/enquiry.png';
 import useWindowSize from "../../hooks/useWindowsize";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,9 @@ export default function GroundOwners() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const handlerequest = async  () => {
 
     if (formData.groundName === "" || formData.location === "" || formData.contact === "" || formData.groundSize === "" || formData.facility === "" || formData.installDate === "") {
@@ -59,7 +62,7 @@ export default function GroundOwners() {
   background: "rgba(255,255,255,0.7)",
 };
   return (
-    <div style={{ width: '100vw', marginTop:"50px" ,  }}>
+    <div style={{ width: '100vw', marginTop: isMobile ? '10px' : "50px" ,  }}>
       <div
         style={{
           width: "100%",
@@ -73,13 +76,13 @@ export default function GroundOwners() {
         <div
           style={{
             width: "90px",
-            height: "90px",
+            height: isMobile ? '90px' : "90px",
             borderRadius: "50%",
             backgroundColor: "#e0e7ff",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            marginBottom: "20px",
+            marginBottom: isMobile ? '5px' : "20px",
           }}
         >
           <img src={enquiry} alt="Enquiry" style={{ width: "50%", height: "50%" }} />
@@ -117,7 +120,7 @@ export default function GroundOwners() {
         <div
       style={{
         width: "80%",
-        margin: "50px auto",
+        margin: isMobile ? '20px auto' : "50px auto",
         padding: "40px",
         borderRadius: "16px",
         background: "rgba(255,255,255,0.35)",
