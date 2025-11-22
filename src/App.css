@@ -1,22 +1,29 @@
 * {
   box-sizing: border-box;
 }
-  /* body {
-  overflow-x: hidden;
-} */
- :root {
+
+/* Force only light theme everywhere */
+:root {
   color-scheme: light !important;
 }
 
+/* Make sure Safari/Android never apply dark inversion */
+html, body {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  color-scheme: light !important;
+}
+
+/* If user device is in dark mode → still force light */
 @media (prefers-color-scheme: dark) {
-  * {
-    background-color: inherit !important;
-    color: inherit !important;
+  html, body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    color-scheme: light !important;
   }
 }
-html, body {
-  color-scheme: light;
-}
+
+/* ---------------- HEADER ---------------- */
 
 .header {
   position: fixed;
@@ -44,18 +51,17 @@ html, body {
   padding: 1rem 2rem;
 }
 
-/* Logo Styles */
+/* Logo */
 .logo-text {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #2563eb;
   background: linear-gradient(135deg, #2563eb, #7c3aed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Navigation Styles */
+/* Navigation */
 .navigation {
   display: flex;
   align-items: center;
@@ -64,9 +70,9 @@ html, body {
 .nav-list {
   display: flex;
   list-style: none;
+  gap: 2rem;
   margin: 0;
   padding: 0;
-  gap: 2rem;
 }
 
 .nav-link {
@@ -97,7 +103,7 @@ html, body {
   width: 100%;
 }
 
-/* Button Styles */
+/* Buttons */
 .header-buttons {
   display: flex;
   align-items: center;
@@ -112,7 +118,7 @@ html, body {
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .login-btn:hover {
@@ -129,7 +135,7 @@ html, body {
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .get-started-btn:hover {
@@ -137,24 +143,24 @@ html, body {
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .header-container {
     padding: 1rem;
   }
-  
+
   .nav-list {
     gap: 1rem;
   }
-  
+
   .nav-link {
     font-size: 0.9rem;
   }
-  
+
   .header-buttons {
     gap: 0.5rem;
   }
-  
+
   .login-btn,
   .get-started-btn {
     padding: 0.4rem 1rem;
@@ -166,7 +172,7 @@ html, body {
   .navigation {
     display: none;
   }
-  
+
   .header-container {
     justify-content: space-between;
   }
