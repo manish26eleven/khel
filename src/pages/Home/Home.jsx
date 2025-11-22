@@ -347,7 +347,7 @@ const Home = () => {
               minWidth:  isMobile ? '200px' : "350px",
               background: "white", // pure white
               height:'auto',
-              padding: isMobile ? '30px' : "50px",
+              padding: isMobile ? '30px' : "40px",
               borderRadius: "22px",
               boxShadow: "0 12px 40px rgba(0,0,0,0.15)", // stronger smooth shadow
               border: "1px solid rgba(0,0,0,0.05)",
@@ -368,7 +368,7 @@ const Home = () => {
                 fontSize: isMobile ? '24px' :  "30px",
                 fontStyle: "italic",
                 marginBottom: "30px",
-                lineHeight: "1.5",
+                // lineHeight: "1.5",
               }}
             >
               "{card.quote}"
