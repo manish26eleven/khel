@@ -4,7 +4,16 @@
   /* body {
   overflow-x: hidden;
 } */
+ :root {
+  color-scheme: light !important;
+}
 
+@media (prefers-color-scheme: dark) {
+  * {
+    background-color: inherit !important;
+    color: inherit !important;
+  }
+}
 
 .header {
   position: fixed;
