@@ -276,7 +276,7 @@ const Home = () => {
         </button>
       </div>
     </div>
-         <div style={{ width: "100%", marginTop: isMobile ? '50px' :  "150px", padding: "0 40px" , marginBottom: isMobile ? '40px' :  "70px" }}>
+         <div style={{ width: "100%", marginTop: isMobile ? '50px' :  "100px", padding: "0 40px" , marginBottom: isMobile ? '40px' :  "70px" }}>
       {/* Title */}
       <h1
         style={{
@@ -346,6 +346,7 @@ const Home = () => {
               flex: "1",
               minWidth:  isMobile ? '200px' : "350px",
               background: "white", // pure white
+              height:'auto',
               padding: isMobile ? '30px' : "50px",
               borderRadius: "22px",
               boxShadow: "0 12px 40px rgba(0,0,0,0.15)", // stronger smooth shadow
